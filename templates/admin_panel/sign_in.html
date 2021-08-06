@@ -1,0 +1,29 @@
+{% extends 'base/base_admin.html' %}
+
+{% block title %} <title>Sign In</title> {% endblock %}
+{% block navbars %} {% endblock %}
+{% block content %}
+    <h2 class="d-flex align-items-center justify-content-center flex-column mt-2">Sign In</h2>
+    <p class="d-flex align-items-center justify-content-center flex-column mt-2" style="color: red;">{{error}}</p>
+    <form action="{% url 'sign_in' %}" method="POST" class="d-flex align-items-center justify-content-center flex-column mt-4" >
+        {% csrf_token %}
+        <div class="mb-3 w-25">
+          <label for="username" class="form-label">Username</label>
+          <input type="text" name="username" class="form-control" id="username" aria-describedby="usernameHelp">
+        </div>
+        <div class="mb-3 w-25">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input type="password" class="form-control" name="password" id="exampleInputPassword1">
+        </div>
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+          <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+      <a href="{% url 'sign_up' %}" class="nav-link active d-flex align-items-center justify-content-center flex-column mt-2">Sign Up</a>
+      <a href="{% url 'home' %}" class="nav-link active d-flex align-items-center justify-content-center flex-column mt-2">Home</a>
+
+
+{% endblock %}

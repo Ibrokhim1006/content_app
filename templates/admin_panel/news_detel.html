@@ -1,0 +1,39 @@
+{% extends 'base/base_admin.html' %}
+
+{% block title %} <title>{{news.title}}</title> {% endblock %}
+
+{% block content %}
+
+<div class="row row-cols-1 mt-1 px-6 row-cols-md-1 g-4" style="width: 98%;">
+   
+    <center>
+        <div class="col-6 mt-5">
+            <div class="card p-3">
+                <h4>{{news.title}}</h4>
+                <img src="{{ news.img.url }}" class="card-img-top mt-3" alt="">
+                <div class="card-body">
+                    <p class="card-text">{{news.content|safe}}</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted" style="display: flex; justify-content: space-around;">
+                        <p>{{news.cate}}</p>
+                        <p>{{news.date|date:'M-y-d'}}</p>
+                        <p>Author:{{news.author}}</p>
+                    </small>
+                    <p class="card-text"><small class="text-muted" style="display: flex;justify-content:space-around">
+                        {% if is_author %}
+                        <a href="{% url 'edite_news' news.id %}" class="btn btn-dark">Edit</a>
+                        <a href="{% url 'delete_news' news.id %}" class="btn btn-danger">Delete</a>
+                        {% endif %}
+                      </small></p>
+                </div>
+            </div>
+        </div>
+ 
+ 
+</div>
+
+
+
+
+{% endblock %}

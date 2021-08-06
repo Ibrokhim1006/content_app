@@ -1,0 +1,90 @@
+{% extends 'base/base_admin.html' %}
+
+{% block title %} <title>Yangilik qo'shish</title> {% endblock %}
+
+{% block content %}
+
+
+{% if con %}
+
+
+<form action="{% url 'edite_news' con.id %}" method="POST" enctype="multipart/form-data" class="d-flex align-items-center justify-content-center flex-column mt-4" >
+    {% csrf_token %}
+    <div class="mb-3 w-25">
+      <label for="title" class="form-label">Title</label>
+      <input type="text" name="title" value="{{con.title}}" class="form-control" id="title" aria-describedby="titleHelp">
+    </div>
+    
+    
+    <div class="mb-3 w-25">
+        <label for="img" class="form-label">Title</label>
+        <input type="file" name="img" class="form-control" id="img" aria-describedby="imgHelp">
+    </div>
+
+    
+    <div class="mb-3 w-25">
+        <label for="content" class="form-label">Content</label>
+        <textarea name="content" id="content" class="form-control" cols="30" rows="10" aria-describedby="contentHelp">
+            {{con.content}}
+        </textarea>
+    </div>
+
+    <div class="mb-3 w-25">
+        <label for="categor" class="form-label">Categor</label>
+        <select name="categor" id="categor" aria-describedby="imgHelp" class="form-control">
+           
+            {% for item in cate %}
+            {% ifequal  con.cate.id item.id %}
+             <option selected='selected' value="{{item.id}}">{{item.name}}</option>
+            {% else %}
+            <option value="{{item.id}}">{{item.name}}</option>
+            {% endifequal %}
+            {% endfor %}
+
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+
+
+{% else %}
+
+<p class="d-flex align-items-center justify-content-center flex-column mt-2" style="color: red;">{{error}}</p>
+<form action="{% url 'add_news' %}" method="POST" enctype="multipart/form-data" class="d-flex align-items-center justify-content-center flex-column mt-4" >
+    {% csrf_token %}
+    <div class="mb-3 w-25">
+      <label for="title" class="form-label">Title</label>
+      <input type="text" name="title" class="form-control" id="title" aria-describedby="titleHelp">
+    </div>
+    
+    
+    <div class="mb-3 w-25">
+        <label for="img" class="form-label">Title</label>
+        <input type="file" name="img" class="form-control" id="img" aria-describedby="imgHelp">
+    </div>
+
+    
+    <div class="mb-3 w-25">
+        <label for="content" class="form-label">Content</label>
+        <textarea name="content" id="content" class="form-control" cols="30" rows="10" aria-describedby="contentHelp"></textarea>
+    </div>
+
+    <div class="mb-3 w-25">
+        <label for="categor" class="form-label">Categor</label>
+        <select name="categor" id="categor" aria-describedby="imgHelp" class="form-control">
+           
+            {% for item in cate %}
+            <option value="{{item.id}}">{{item.title}}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+
+{% endif %}
+
+
+
+{% endblock %}

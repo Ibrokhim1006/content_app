@@ -1,0 +1,81 @@
+{% extends 'base/base_news.html' %}
+
+{% block title %} <title>Yangiliklar {{cate.name}} {% for item in detel %} {{item.title}} {% endfor %}</title> {% endblock %}
+
+{% block content %}
+
+<!------------- News All --------------------- -->
+
+<div class="row row-cols-1 mt-1 px-6 row-cols-md-1 g-4 col-xs" style="width: 98%;">
+    {% for item in news %}
+    <center>
+        <div class="col-6 mt-5">
+            <div class="card p-3">
+                <img src="{{ item.img.url }}" class="card-img-top" alt="">
+                <div class="card-body">
+                    <h4><a href="{% url 'detel_news' item.id %}" class="card-title">{{item.title}}</a></h4>
+                    <p class="card-text">{{item.content|safe|truncatewords:20}}</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted" style="display: flex; justify-content: space-around;">
+                        <p>{{item.cate}}</p>
+                        <p>{{item.date|date:'M-y-d'}}</p>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </center>
+    {% endfor %}
+</div>
+
+
+
+<!---------------------------------- News categor-------------------------- -->
+
+<div class="row row-cols-1 mt-1 px-6 row-cols-md-1 g-4" style="width: 98%;">
+    {% for item in content %}
+    <center>
+        <div class="col-6 mt-5">
+            <div class="card p-3">
+                <img src="{{ item.img.url }}" class="card-img-top" alt="">
+                <div class="card-body">
+                    <h4><a href="{% url 'detel_news' item.id %}" class="card-title">{{item.title}}</a></h4>
+                    <p class="card-text">{{item.content|safe|truncatewords:20}}</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted" style="display: flex; justify-content: space-around;">
+                        <p>{{item.cate}}</p>
+                        <p>{{item.date|date:'M-y-d'}}</p>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </center>
+    {% endfor %}
+</div>
+
+
+<!-------------detele news---------------------------  -->
+<div class="row row-cols-1 mt-1 px-6 row-cols-md-1 g-4" style="width: 98%;">
+    {% for item in detel %}
+    <center>
+        <div class="col-6 mt-5">
+            <div class="card p-3">
+                <h4>{{item.title}}</h4>
+                <img src="{{ item.img.url }}" class="card-img-top mt-3" alt="">
+                <div class="card-body">
+                    <p class="card-text">{{item.content|safe}}</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted" style="display: flex; justify-content: space-around;">
+                        <p>{{item.cate}}</p>
+                        <p>{{item.date|date:'M-y-d'}}</p>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </center>
+    {% endfor %}
+</div>
+
+{% endblock %}
